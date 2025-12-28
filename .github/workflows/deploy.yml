@@ -5,6 +5,8 @@ on:
   # Using a different branch name? Replace `main` with your branch’s name
   push:
     branches: [master]
+  repository_dispatch:
+    types: [posts-updated]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
@@ -20,6 +22,15 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v6
+
+      - name: Checkout posts repository
+        uses: actions/checkout@v6
+        with:
+          repository: Gemuxi/posts
+          path: src/content/posts
+          token: ${{ secrets.POSTS_REPO_TOKEN }}
+          fetch-depth: 1
+
       - name: Install, build, and upload your site output
         uses: withastro/action@v5
         with:

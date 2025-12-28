@@ -36,3 +36,6 @@ Docs-Firefly/
 cache/
 package/
 .obsidian/
+
+# posts
+src/content/posts/
